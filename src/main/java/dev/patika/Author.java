@@ -2,6 +2,8 @@ package dev.patika;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "authors")
 public class Author {
@@ -18,6 +20,9 @@ public class Author {
 
     @Column(name = "author_country")
     private String country;
+
+    @OneToMany(mappedBy = "author")
+    private List<Book> bookList;
 
     public Author() {
     }
@@ -52,6 +57,14 @@ public class Author {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 
     @Override

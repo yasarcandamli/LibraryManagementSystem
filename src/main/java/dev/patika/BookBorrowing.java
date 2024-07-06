@@ -20,8 +20,11 @@ public class BookBorrowing {
     private LocalDate borrowingDate;
 
     @Column(name = "return_date")
-    @Temporal(TemporalType.DATE)
     private LocalDate returnDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_borrowing_book_id", referencedColumnName = "book_id")
+    private Book book;
 
     public BookBorrowing() {
     }

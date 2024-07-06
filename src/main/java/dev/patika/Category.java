@@ -2,6 +2,8 @@ package dev.patika;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -15,6 +17,9 @@ public class Category {
 
     @Column(name = "category_description")
     private String description;
+
+    @ManyToMany(mappedBy = "categoryList")
+    private List<Book> bookList;
 
     public Category() {
     }
@@ -41,6 +46,14 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 
     @Override
