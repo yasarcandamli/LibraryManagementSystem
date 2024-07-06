@@ -1,7 +1,9 @@
 package dev.patika;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.Fetch;
 
+import java.time.Year;
 import java.util.List;
 
 @Entity
@@ -16,12 +18,12 @@ public class Publisher {
     private String name;
 
     @Column(name = "publisher_establishmentYear")
-    private String establishmentYear;
+    private Year establishmentYear;
 
     @Column(name = "publisher_address")
     private String address;
 
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Book> bookList;
 
     public Publisher() {
@@ -43,11 +45,11 @@ public class Publisher {
         this.name = name;
     }
 
-    public String getEstablishmentYear() {
+    public Year getEstablishmentYear() {
         return establishmentYear;
     }
 
-    public void setEstablishmentYear(String establishmentYear) {
+    public void setEstablishmentYear(Year establishmentYear) {
         this.establishmentYear = establishmentYear;
     }
 

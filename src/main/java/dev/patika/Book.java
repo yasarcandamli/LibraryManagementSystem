@@ -3,6 +3,7 @@ package dev.patika;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class Book {
     private String name;
 
     @Column(name = "book_publication_year")
-    private String publicationYear;
+    private Year publicationYear;
 
     @Column(name = "book_stock")
     private int stock;
@@ -38,7 +39,7 @@ public class Book {
     @JoinColumn(name = "book_publisher_id", referencedColumnName = "publisher_id")
     private Publisher publisher;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<BookBorrowing> bookBorrowingList;
 
     public Book() {
@@ -60,11 +61,11 @@ public class Book {
         this.name = name;
     }
 
-    public String getPublicationYear() {
+    public Year getPublicationYear() {
         return publicationYear;
     }
 
-    public void setPublicationYear(String publicationYear) {
+    public void setPublicationYear(Year publicationYear) {
         this.publicationYear = publicationYear;
     }
 
@@ -92,6 +93,22 @@ public class Book {
         this.categoryList = categoryList;
     }
 
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
+    public List<BookBorrowing> getBookBorrowingList() {
+        return bookBorrowingList;
+    }
+
+    public void setBookBorrowingList(List<BookBorrowing> bookBorrowingList) {
+        this.bookBorrowingList = bookBorrowingList;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -101,6 +118,7 @@ public class Book {
                 ", stock=" + stock +
                 ", author=" + author +
                 ", categoryList=" + categoryList +
+                ", publisher=" + publisher +
                 '}';
     }
 }

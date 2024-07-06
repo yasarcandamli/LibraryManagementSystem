@@ -16,7 +16,6 @@ public class BookBorrowing {
     private String borrowerName;
 
     @Column(name = "borrowing_date")
-    @Temporal(TemporalType.DATE)
     private LocalDate borrowingDate;
 
     @Column(name = "return_date")
@@ -61,6 +60,14 @@ public class BookBorrowing {
         this.returnDate = returnDate;
     }
 
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
     @Override
     public String toString() {
         return "BookBorrowing{" +
@@ -68,6 +75,7 @@ public class BookBorrowing {
                 ", borrowerName='" + borrowerName + '\'' +
                 ", borrowingDate=" + borrowingDate +
                 ", returnDate=" + returnDate +
+                ", book=" + book +
                 '}';
     }
 }
